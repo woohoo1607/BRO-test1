@@ -1,6 +1,6 @@
-window.onload = () => {
+window.addEventListener('load', () => {
   initial();
-}
+});
 
 const initial = () => {
   const size = 4;
@@ -10,7 +10,7 @@ const initial = () => {
   const footerRoot = createElement('div', 'footer-root');
   const leftBodyRoot = createElement('div', 'left-body-root');
   const rightBodyRoot = createElement('div', 'right-body-root');
-  const table = createElement('div','' ,'table');
+  const table = createElement('div', '', 'table');
   const addColumnBtn = createElement('button', 'item button add-button');
   const addLineBtn = createElement('button', 'item button add-button');
 
@@ -25,14 +25,14 @@ const initial = () => {
     addElement(table, line);
   }
 
-  addColumnBtn.onclick = () => {
-    for (let i=0; i<table.childNodes.length; i++) {
+  addColumnBtn.addEventListener('click', () => {
+    for (let i = 0; i < table.childNodes.length; i++) {
       addElement(table.childNodes[i], createElement('div', 'item'))
     }
     createDeleteBtn(headerRoot, table, true, leftBodyRoot);
-  }
+  });
 
-  addLineBtn.onclick = () => {
+  addLineBtn.addEventListener('click', () => {
     const line = createElement('div', 'line');
     for (let j = 0; j < table.childNodes[0].childNodes.length; j++) {
       const item = createElement('div', 'item')
@@ -40,7 +40,7 @@ const initial = () => {
     }
     addElement(table, line);
     createDeleteBtn(leftBodyRoot, table, false, headerRoot);
-  }
+  })
 
   addElement(rightBodyRoot, addColumnBtn);
   addElement(footerRoot, addLineBtn);
@@ -51,7 +51,7 @@ const initial = () => {
   addElement(root, bodyRoot);
   addElement(root, footerRoot);
 
-  root.onmouseout = (e) => {
+  root.addEventListener('mouseout', (e) => {
     const el = e.relatedTarget;
     if (el) {
       const isItem = !!el.classList.value.split(' ').find(el => el === 'item');
@@ -65,11 +65,11 @@ const initial = () => {
           changeStatusDeleteBtn(leftBodyRoot, lineIndex, true)
         }
       } else {
-        if (el.parentNode===document) {
+        if (el.parentNode === document) {
           return
         }
         const isBodyRootParent = !!el.parentNode.classList.value.split(' ').find(el => el === 'body-root');
-        if (el===null || el.parentNode.id === 'root' || isBodyRootParent && el.id !== 'table' || el.id === 'root') {
+        if (el === null || el.parentNode.id === 'root' || isBodyRootParent && el.id !== 'table' || el.id === 'root') {
           changeStatusDeleteBtn(headerRoot)
           changeStatusDeleteBtn(leftBodyRoot)
         }
@@ -78,7 +78,7 @@ const initial = () => {
       changeStatusDeleteBtn(headerRoot)
       changeStatusDeleteBtn(leftBodyRoot)
     }
-  }
+  });
 };
 
 const createElement = (tagName, className, idName) => {
@@ -99,19 +99,19 @@ const addElement = (parent, element) => {
 
 const findIndex = (element) => {
   for (let i = 0; i < element.parentNode.childNodes.length; i++) {
-    if (element.parentNode.childNodes[i]===element) {
+    if (element.parentNode.childNodes[i] === element) {
       return i
     }
   }
 };
 
-const changeStatusDeleteBtn = (block, index=0, isVisible=false) => {
-  if (block.childNodes.length===1) {
+const changeStatusDeleteBtn = (block, index = 0, isVisible = false) => {
+  if (block.childNodes.length === 1) {
     return;
   }
   if (isVisible) {
     for (let i = 0; i < block.childNodes.length; i++) {
-      if (i===index) {
+      if (i === index) {
         block.childNodes[i].style = 'visibility: visible'
       } else {
         block.childNodes[i].style = 'visibility: hidden'
@@ -127,16 +127,16 @@ const changeStatusDeleteBtn = (block, index=0, isVisible=false) => {
 const createDeleteBtn = (parent, table, isDeleteColumn, otherDeleteBtnParent) => {
   const deleteBtn = createElement('button', 'item button delete-button');
   if (isDeleteColumn) {
-    deleteBtn.onclick = deleteColumn(table, deleteBtn, parent, otherDeleteBtnParent);
+    deleteBtn.addEventListener('click', deleteColumn(table, deleteBtn, parent, otherDeleteBtnParent));
   } else {
-    deleteBtn.onclick = deleteLine(table, deleteBtn, parent, otherDeleteBtnParent);
+    deleteBtn.addEventListener('click', deleteLine(table, deleteBtn, parent, otherDeleteBtnParent));
   }
   addElement(parent, deleteBtn);
 };
 
 const deleteColumn = (table, btn, btnParent, otherDeleteBtnParent) => () => {
   const index = findIndex(btn);
-  for (let i=0; i<table.childNodes.length; i++) {
+  for (let i = 0; i < table.childNodes.length; i++) {
     const itemToRemove = table.childNodes[i].childNodes[index];
     table.childNodes[i].removeChild(itemToRemove);
   }

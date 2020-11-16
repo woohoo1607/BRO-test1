@@ -1,68 +1,135 @@
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, big, em, font, img, small, strong, sub, sup, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit;  font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline;}
-:focus { outline: 0;}
-ol, ul { list-style: none;}
-table { border-collapse: separate; border-spacing: 0;}
-caption, th, td { text-align: left; font-weight: normal;}
-strong,b{font-weight:bold}
-em{font-style:italic}
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 /*-------------------------------------*/
-html {width:100%;}
-body {font-size:17px; color: #737373; background: #fff; line-height:1;}
-a {color: #f39200; text-decoration: underline;}
-a:hover {text-decoration:none;}
-.clr,#clr {clear: both;}
-* {box-sizing: border-box;}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, big, em, font, img, small, strong, sub, sup, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+:focus {
+    outline: 0;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+}
+
+strong, b {
+    font-weight: bold
+}
+
+em {
+    font-style: italic
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+/*-------------------------------------*/
+html {
+    width: 100%;
+}
+
+body {
+    font-size: 17px;
+    color: #737373;
+    background: #fff;
+    line-height: 1;
+}
+
+a {
+    color: #f39200;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.clr, #clr {
+    clear: both;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 /*-------------------------------------   word-wrap: break-word;  */
 
 :root {
     --size-q: 60px;
 }
 
-.header-root > .delete-button {
+.header-root .delete-button {
     height: calc(var(--size-q) + 1px);
     border-bottom-width: 2px;
 }
-.footer-root > .add-button {
+
+.footer-root .add-button {
     height: calc(var(--size-q) + 1px);
     border-top-width: 2px;
 }
-.left-body-root > .delete-button {
-     width: calc(var(--size-q) + 1px);
-     border-right-width: 2px;
+
+.left-body-root .delete-button {
+    width: calc(var(--size-q) + 1px);
+    border-right-width: 2px;
 }
-.right-body-root > .add-button {
-      width: calc(var(--size-q) + 1px);
-      border-left-width: 2px;
+
+.right-body-root .add-button {
+    width: calc(var(--size-q) + 1px);
+    border-left-width: 2px;
 }
+
 .body-root {
     display: flex;
 }
+
 .left-body-root, .right-body-root {
     margin-top: 2px;
     display: flex;
     flex-direction: column;
 }
+
 .header-root, .footer-root {
     margin-left: 62px;
     display: flex;
 }
+
 #table {
     display: inline-block;
     border: 1px #48aae6 solid;
     background-color: white;
     padding: 1px;
 }
+
 .line {
     display: flex;
 }
+
 .item {
     width: 60px;
     height: 60px;
     background-color: #48aae6;
     border: 1px solid white;
 }
+
 .button {
     padding: 0;
     font-size: 25px;
@@ -72,24 +139,30 @@ a:hover {text-decoration:none;}
     line-height: 56px;
     cursor: pointer;
 }
+
 .add-button {
     background-color: #f3a500;
-    transition: background-color 1s;
+    transition: background-color .3s;
 }
+
 .add-button:hover {
     background-color: #f6c052;
 }
+
 .delete-button {
     background-color: #b20000;
     visibility: hidden;
-    transition: background-color 1s;
+    transition: background-color .3s;
 }
+
 .delete-button:hover {
     background-color: #ca4c49;
 }
+
 .add-button:after {
     content: '+';
 }
+
 .delete-button:after {
     content: '-';
 }
