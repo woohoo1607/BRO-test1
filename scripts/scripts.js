@@ -3,7 +3,7 @@ window.onload = () => {
 }
 
 const initial = () => {
-  const size = 3;
+  const size = 4;
   const root = document.getElementById('root');
   const headerRoot = createElement('div', 'header-root');
   const bodyRoot = createElement('div', 'body-root');
