@@ -1,50 +1,50 @@
-/*
 window.addEventListener('load', () => {
-  initial();
+  initial2();
 });
 
-const initial = () => {
+const initial2 = () => {
   const size = 4;
-  const root = document.getElementById('root');
+  const root = document.getElementById('root2');
   const headerRoot = createElement('div', 'header-root');
   const bodyRoot = createElement('div', 'body-root');
   const footerRoot = createElement('div', 'footer-root');
   const leftBodyRoot = createElement('div', 'left-body-root');
   const rightBodyRoot = createElement('div', 'right-body-root');
-  const table = createElement('div', '', 'table');
+  const table = createElement('table', '', 'table');
+  const tbody = createElement('tbody', '');
   const addColumnBtn = createElement('button', 'item button add-button');
   const addLineBtn = createElement('button', 'item button add-button');
 
+  const deleteLine = createDeleteBtn(leftBodyRoot, table, false, headerRoot);
+  const deleteColumn = createDeleteBtn(headerRoot, table, true, leftBodyRoot);
+
   for (let i = 0; i < size; i++) {
-    createDeleteBtn(leftBodyRoot, table, false, headerRoot);
-    createDeleteBtn(headerRoot, table, true, leftBodyRoot);
-    const line = createElement('div', 'line');
+    const line = createElement('tr', 'line');
     for (let j = 0; j < size; j++) {
-      const item = createElement('div', 'item')
+      const item = createElement('td', 'item')
       addElement(line, item)
     }
-    addElement(table, line);
+    addElement(tbody, line);
   }
 
   addColumnBtn.addEventListener('click', () => {
-    for (let i = 0; i < table.childNodes.length; i++) {
-      addElement(table.childNodes[i], createElement('div', 'item'))
+    for (let i = 0; i < tbody.childNodes.length; i++) {
+      addElement(tbody.childNodes[i], createElement('td', 'item'))
     }
-    createDeleteBtn(headerRoot, table, true, leftBodyRoot);
   });
 
   addLineBtn.addEventListener('click', () => {
-    const line = createElement('div', 'line');
-    for (let j = 0; j < table.childNodes[0].childNodes.length; j++) {
-      const item = createElement('div', 'item')
+    const line = createElement('tr', 'line');
+    for (let j = 0; j < tbody.childNodes[0].childNodes.length; j++) {
+      const item = createElement('td', 'item')
       addElement(line, item)
     }
-    addElement(table, line);
-    createDeleteBtn(leftBodyRoot, table, false, headerRoot);
-  })
+    addElement(tbody, line);
+  });
 
   addElement(rightBodyRoot, addColumnBtn);
   addElement(footerRoot, addLineBtn);
+  addElement(table, tbody);
   addElement(bodyRoot, leftBodyRoot);
   addElement(bodyRoot, table);
   addElement(bodyRoot, rightBodyRoot);
@@ -62,8 +62,10 @@ const initial = () => {
         if (isLine) {
           const cellIndex = findIndex(el);
           const lineIndex = findIndex(line);
-          changeStatusDeleteBtn(headerRoot, cellIndex, true)
-          changeStatusDeleteBtn(leftBodyRoot, lineIndex, true)
+          deleteLine.style = `top: ${lineIndex*60}px; visibility: visible`
+          deleteColumn.style = `left: ${cellIndex*60}px; visibility: visible`
+/*          changeStatusDeleteBtn(deleteLine, true)
+          changeStatusDeleteBtn(deleteColumn, true)*/
         }
       } else {
         if (el.parentNode === document) {
@@ -80,6 +82,7 @@ const initial = () => {
       changeStatusDeleteBtn(leftBodyRoot)
     }
   });
+
 };
 
 const createElement = (tagName, className, idName) => {
@@ -106,22 +109,12 @@ const findIndex = (element) => {
   }
 };
 
-const changeStatusDeleteBtn = (block, index = 0, isVisible = false) => {
-  if (block.childNodes.length === 1) {
-    return;
-  }
+const changeStatusDeleteBtn = (btn, isVisible = false) => {
+
   if (isVisible) {
-    for (let i = 0; i < block.childNodes.length; i++) {
-      if (i === index) {
-        block.childNodes[i].style = 'visibility: visible'
-      } else {
-        block.childNodes[i].style = 'visibility: hidden'
-      }
-    }
+    btn.style = 'visibility: visible';
   } else {
-    for (let i = 0; i < block.childNodes.length; i++) {
-      block.childNodes[i].style = 'visibility: hidden'
-    }
+    btn.style = 'visibility: hidden';
   }
 };
 
@@ -133,6 +126,7 @@ const createDeleteBtn = (parent, table, isDeleteColumn, otherDeleteBtnParent) =>
     deleteBtn.addEventListener('click', deleteLine(table, deleteBtn, parent, otherDeleteBtnParent));
   }
   addElement(parent, deleteBtn);
+  return deleteBtn;
 };
 
 const deleteColumn = (table, btn, btnParent, otherDeleteBtnParent) => () => {
@@ -151,4 +145,3 @@ const deleteLine = (table, btn, btnParent, otherDeleteBtnParent) => () => {
   btnParent.removeChild(btn);
   changeStatusDeleteBtn(otherDeleteBtnParent);
 };
-*/
